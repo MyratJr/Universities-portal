@@ -1,0 +1,166 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>Material Design for Bootstrap</title>
+  <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="{% static 'css/bootstrap-comments.min.css' %}" />
+</head>
+
+<body>
+    {% include 'header.html' %}
+    {% include 'sidebar.html' %}
+
+  <!-- Start your project here-->
+  <style>
+    .link-grey { color: #aaa; } .link-grey:hover { color: #00913b; }
+    .sections-l{
+        margin-left: 10%;
+        margin-right:10%
+    }
+  </style>
+
+  <section class="sections-l">
+    <div class="my-1 py-6 text-dark">
+      <div class="row d-flex ">
+        <div class="col-md-12 col-lg-10 col-xl-9">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="mb-0" style="color:rgba(0, 0, 187, 0.74)">
+              {% if teswirler %}
+              {% if ln == 'tm' %}
+              Teswirler
+              {% elif ln == 'ru' %}
+              Комментарии
+              {% elif ln == 'en' %}
+              Comments
+              {% endif %}
+              {% endif %}
+              </h3>
+            <div class="card">
+            </div>
+          </div>
+          {% if not teswirler %}
+          <h2 style="color:grey;text-align:center;font-size:5vh">
+            {% if ln == 'tm' %}
+            Bagyşlaň, heniz teswir ýok
+            {% elif ln == 'ru' %}
+            Извините, комментариев пока нет
+            {% elif ln == 'en' %}
+            Sorry, no comments yet
+            {% endif %}
+            </h2>
+          {% endif %}
+          {% for j in teswirler %}
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="d-flex flex-start">
+                <img
+                  class="rounded-circle shadow-1-strong me-3"
+                  src="{% static 'images/user.png' %}"
+                  width="40"
+                  height="40"
+                />
+                <div class="w-100">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h6 class="text-primary fw-bold mb-0">
+                      {{j.at}}<br>
+                      <span class="text-dark ms-2">{{j.beyan}}</span>
+                    </h6>
+                    <p class="mb-0">{{j.wagt|date:"d.m.Y"}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="m-4">
+    <div id="addItem" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content editboxes">
+                <div class="modal-header">
+                    <h5 class="modal-title"><img src="" width="30"><h6 style="margin-left:5px;margin-top:2%">Işgär girizmek</h6></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form action="{% url 'teswir' a1.id ln %}" method="post">
+                  {% csrf_token %}
+                  <div class="form-row" style="display:flex;margin-left:4%;width:23vw;margin-top:3%">
+                    <div class="col-md-12 mb-3">
+                        {{form.at}}
+                    </div>
+                  </div>
+                  <div class="form-row" style="display:flex;margin-left:4%;width:23vw">
+                    <div class="col-md-12 mb-3">
+                        {{form.email}}
+                    </div>
+                  </div>
+                  <div class="form-row" style="display:flex;margin-left:4%;width:23vw">
+                    <div class="col-md-12 mb-3">
+                        {{form.password}}
+                    </div>
+                  </div>
+                  <div class="form-row" style="display:flex;margin-left:4%;width:23vw">
+                    <div class="col-md-12 mb-3">
+                        {{form.phone}}
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Ýatda sakla</button>
+                </div>
+              </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% if v2 %}
+  <script>
+    setTimeout(function(){
+        Swal.fire({
+            title: '<strong>Üns beriň!!!</strong>',
+            icon: '{{v3}}',
+            html:
+              '{{v2}}{{v1}}',
+            showCloseButton: true,
+        
+            focusConfirm: false,
+            confirmButtonText:
+              '<a href="#addItem" data-bs-toggle="modal" class="fa fa-thumbs-up" style="text-decoration:none;color:white">Goşul</a>',
+            confirmButtonAriaLabel: 'Thumbs up, great!',
+          })
+  },0);
+  </script>
+  {% endif %}
+  {% if v1 %}
+  <script>
+    setTimeout(function(){
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+    
+    Toast.fire({
+      icon: '{{v3}}',
+      title: '{{v1}}'
+    })
+  },0);
+  </script>
+  {% endif %}
+  
+  <script src="{% static 'js/sweetalert2@11.js' %}"></script>
+</body>
+{% include 'footer.html' with topi='32%' ses='25%' %}
+</html>

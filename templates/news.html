@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+{% include 'header.html' %}
+{% include 'news_sidebar.html' %}
+
+<body>
+    <b style="font-size:7vh;font-family:'Times New Roman', Times, serif;margin-left:5%;margin-right:35%">
+        {% if ln == 'tm' %}
+        {{habar.title_tm}}
+        {% elif ln == 'ru' %}
+        {{habar.title_ru}}
+        {% elif ln == 'en' %}
+        {{habar.title_en}}
+        {% endif %}
+        </b>
+    <h5 class="text-muted" style="margin-left:5%;">{{habar.wagt|date:"d.m.Y"}}</h5>
+    <img src="{{habar.surat.url}}" style="margin-left:5%;width:60%;">
+    <h4 style="margin-right:35%;margin-left:5%;font-family:sans-serif">&nbsp&nbsp&nbsp&nbsp&nbsp
+        {% if ln == 'tm' %}
+        {{habar.beyan_tm|linebreaks}}
+        {% elif ln == 'ru' %}
+        {{habar.beyan_ru|linebreaks}}
+        {% elif ln == 'en' %}
+        {{habar.beyan_en|linebreaks}}
+        {% endif %}
+        </h4>
+</body>
+{% include 'footer.html' with topi='20vh' %}
+</html>

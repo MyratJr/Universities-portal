@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+  @media (max-width: 1200px) {
+    .sd{
+    margin-bottom: 2rem;
+  }}
+</style>
+<header class="sd" style="  position:relative;top: 0;z-index: 999;; width:100%;height:8vh">
+    <div class="navbar shadow-sm" style="background-color:rgba(0, 0, 187, 0.74);height:100%">
+      <div class="">
+        <a href="#" style="color:white;text-decoration:none;font-size:3vh;color:white;margin-left:6vw">Uniwersitet portal</a>
+        
+        <li class="nav-item dropdown" style="list-style:none;display:inline-block;margin-left:1vw">
+            <a style="color:aliceblue;" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="{% static 'images/translate.png' %}" style="width:3.6vh;">
+            </a>
+            <ul class="dropdown-menu">
+                {% if habar %}
+                <li><a class="dropdown-item" href="{% url 'dil1' 'tm' page habar.id %}"><img src="{% static 'images/turkmenistan.png' %}" width="20"> türkmen dili</a></li>
+                <li><a class="dropdown-item" href="{% url 'dil1' 'ru' page habar.id %}"><img src="{% static 'images/russia.png' %}" width="20"> rus dili</a></li>
+                <li><a class="dropdown-item" href="{% url 'dil1' 'en' page habar.id %}"><img src="{% static 'images/england.png' %}" width="20"> iňlis dili</a></li>
+                {% elif san %}
+                <li><a class="dropdown-item" href="{% url 'index' 'tm' %}"><img src="{% static 'images/turkmenistan.png' %}" width="20"> türkmen dili</a></li>
+                <li><a class="dropdown-item" href="{% url 'index' 'ru' %}"><img src="{% static 'images/russia.png' %}" width="20"> rus dili</a></li>
+                <li><a class="dropdown-item" href="{% url 'index' 'en' %}"><img src="{% static 'images/england.png' %}" width="20"> iňlis dili</a></li>
+                {% else %}
+              <li><a class="dropdown-item" href="{% url 'dil' 'tm' page %}"><img src="{% static 'images/turkmenistan.png' %}" width="20"> türkmen dili</a></li>
+              <li><a class="dropdown-item" href="{% url 'dil' 'ru' page %}"><img src="{% static 'images/russia.png' %}" width="20"> rus dili</a></li>
+              <li><a class="dropdown-item" href="{% url 'dil' 'en' page %}"><img src="{% static 'images/england.png' %}" width="20"> iňlis dili</a></li>
+                {% endif %}
+            </ul>
+          </li>
+        <a href="{% url 'index' ln %}" id="getimages" style="color:white;margin-left:1vw;text-decoration:none">
+            {% if ln == 'tm' %}
+            Baş sahypa
+            {% elif ln == 'ru' %}
+            Дома
+            {% elif ln == 'en' %}
+            Home
+            {% endif %}    
+        </a>
+        <style>
+          @media (min-width: 1200px) {
+            .F_uly{
+              margin-left: 50vw;
+              margin-top:-4vh;
+            }
+            .F_s{
+              margin-left:-14vw;
+              font-size:2.5vh;
+              color:white;
+              text-decoration: none;
+            }
+          }
+          @media (max-width: 1200px) {
+            .F_uly{
+              margin-left: 65vw;
+              margin-top:2rem;
+              margin-bottom:100rem;
+            }
+            .F_s{
+              font-size:2.5vh;
+              color:blue;
+              margin-left:-55vw;
+              text-decoration: none;
+              
+            }
+          }
+        </style>
+        <form method="POST" action="{% url 'yurt_uni' ln %}" onchange="submit()">
+            {% csrf_token %}
+        <div class="F_uly">
+        <b class="F_s">
+          {% if ln == 'tm' %}
+          Ýurt boýunça okuw saýla
+          {% elif ln == 'ru' %}
+          Выберите университет по стране
+          {% elif ln == 'en' %}
+          Select a university by country         
+          {% endif %} 
+        </b>
+            <select class="form-select" aria-label=".form-select-lg example"
+            style="width: 15vw;margin-top:-4vh;display:inline-block" name="yurt">
+            {% for i in yurtlar %}
+                <option>
+                  {% if ln == 'tm' %}
+                  {{i.at_tm}}
+                  {% elif ln == 'ru' %}
+                  {{i.at_ru}}
+                  {% elif ln == 'en' %}
+                  {{i.at_en}}         
+                  {% endif %} 
+                </option>
+            {% endfor %}
+            </select>
+        </div>
+        </form>        
+      </div>
+    </div>
+  </header>
+</html>

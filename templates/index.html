@@ -1,0 +1,224 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/uniwersity.css' %}" rel="stylesheet">
+</head>
+{% include 'header.html' %}
+<body>
+  <style>
+    @media (min-width: 1200px) {
+      .uly{
+        font-size:7vh;
+        margin-left:10vw;
+      }
+      .u_s{
+        width: 20vh;
+      }
+    }
+    @media (max-width: 1200px) {
+      .uly{
+        font-size:3vh;
+      }
+      .u_s{
+        width: 10vh;
+        margin-left:22%;
+        margin-top:-3vh
+      }
+    }
+  </style>
+    <div style="margin-top:-3%;margin-left:25vw;margin-bottom:-10vh">
+        <h1><img src="{% static 'images/bet_logo.png' %}" class="u_s" style="margin-bottom:-25vh;"><h1 class="uly" style="margin-top:4%;color:rgba(0, 0, 187, 0.74)">UNIWERSITET PORTAL</h1></h1>
+    </div>
+    {% for i in videos %}
+    {% if forloop.counter == 1 %}
+    <video autoplay loop muted width="40%" style="margin-left:6.5%;margin-top:18vh;border-radius: 20px;">
+    {% elif forloop.counter == 2 %}
+    <video autoplay loop width="40%" style="margin-left:6.5%;margin-top:18vh;border-radius: 20px;">
+    {% endif %}
+        <source src="{{i.video}}" type="video/mp4">
+    </video>
+    {% endfor %}
+    <h1 style="color:rgba(0, 0, 187, 0.74);text-align:center;margin-top:5%;font-size:6vh">
+        {% if ln == 'tm' %}
+        Täze tehnologiýalar (Habarlar)
+        {% elif ln == 'ru' %}
+        Новые технологии (Новости)
+        {% elif ln == 'en' %}
+        New technologies (News)
+        {% endif %}
+    </h1>
+    <div class="album py-5 bg-light" style="margin-top:3%;">
+        <div class="container">
+    
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for i in tazelikler %}
+            <div class="col-md-3">
+              <div class="card shadow-sm">
+                <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="{{i.surat}}" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
+                <a href="{% url 'each_news' i.id ln %}"><img class="bd-placeholder-img card-img-top" src="{{i.surat}}" height="160"></a>
+                <div class="card-body">
+                  <p class="card-text" style="min-height: 72px;">
+                    {% if ln == 'tm' %}
+                    {{i.title_tm}}
+                    {% elif ln == 'ru' %}
+                    {{i.title_ru}}
+                    {% elif ln == 'en' %}
+                    {{i.title_en}}
+                    {% endif %}
+                </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a type="button" href="{% url 'each_news' i.id ln %}" class="btn btn-sm btn-outline-secondary">
+                        {% if ln == 'tm' %}
+                        Giňişleýin
+                        {% elif ln == 'ru' %}
+                        Более
+                        {% elif ln == 'en' %}
+                        More
+                        {% endif %}
+                        </a>
+                    </div>
+                    <small class="text-muted">{{i.wagt|date:"d.m.Y"}}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          <a type="button" href="{% url 'all_news' ln %}" class="btn btn-outline-secondary col-md-1" style="margin-left:45.7%;margin-top:3%">
+            {% if ln == 'tm' %}
+            Ähli
+            {% elif ln == 'ru' %}
+            Все
+            {% elif ln == 'en' %}
+            All
+            {% endif %}
+            </a>
+        </div>
+      </div>
+
+    <h1 style="color:rgba(0, 0, 187, 0.74);text-align:center;margin-top:5%;font-size:6vh">
+        {% if ln == 'tm' %}
+        Türkmenistanyň ýokary okuw jaýlaryndan
+        {% elif ln == 'ru' %}
+        От высших учебных заведений Туркменистана
+        {% elif ln == 'en' %}
+        Higher educational institutions of Turkmenistan
+        {% endif %}
+        </h1>
+    <div class="album py-5 bg-light" style="margin-top:3%;">
+        <div class="container">
+    
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for i in tkm_uniwersitet %}
+            <div class="col-md-3" >
+              <div class="card shadow-sm">
+                <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="{{i.surat}}" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
+                <img class="bd-placeholder-img card-img-top" src="{{i.surat}}" height="160">
+                <div class="card-body">
+                  <p class="card-text" style="min-height: 72px;">
+                    {% if ln == 'tm' %}
+                    {{i.at_tm}}
+                    {% elif ln == 'ru' %}
+                    {{i.at_ru}}
+                    {% elif ln == 'en' %}
+                    {{i.at_en}}
+                    {% endif %}
+                    </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a type="button" href="{{i.link}}" class="btn btn-sm btn-outline-secondary">
+                        {% if ln == 'tm' %}
+                        Giňişleýin
+                        {% elif ln == 'ru' %}
+                        Более
+                        {% elif ln == 'en' %}
+                        More
+                        {% endif %}    
+                    </a>
+                      <a type="button" href="{% url 'teswir' i.id ln %}" class="btn btn-sm btn-outline-secondary">
+                        {% if ln == 'tm' %}
+                        Teswir
+                        {% elif ln == 'ru' %}
+                        Комментарий
+                        {% elif ln == 'en' %}
+                        Comment
+                        {% endif %}       
+                    </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <h1 style="color:rgba(0, 0, 187, 0.74);text-align:center;margin-top:5%;font-size:6vh">
+        {% if ln == 'tm' %}
+        Daşary ýurt ýokary okuw jaýlaryndan
+        {% elif ln == 'ru' %}
+        Из зарубежных вузов
+        {% elif ln == 'en' %}
+        From foreign universities
+        {% endif %}  
+        </h1>
+    <div class="album py-5 bg-light" style="margin-top:3%;">
+        <div class="container">
+    
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for i in global_uniwersitet %}
+            <div class="col-md-3">
+              <div class="card shadow-sm">
+                <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="{{i.surat}}" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
+                <img class="bd-placeholder-img card-img-top" src="{{i.surat}}" height="160">
+                <div class="card-body">
+                  <p class="card-text" style="min-height: 72px;">
+                    {% if ln == 'tm' %}
+                    {{i.at_tm}}
+                    {% elif ln == 'ru' %}
+                    {{i.at_ru}}
+                    {% elif ln == 'en' %}
+                    {{i.at_en}}
+                    {% endif %}
+                  </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a type="button" href="{{i.link}}" class="btn btn-sm btn-outline-secondary">
+                        {% if ln == 'tm' %}
+                        Giňişleýin
+                        {% elif ln == 'ru' %}
+                        Более
+                        {% elif ln == 'en' %}
+                        More
+                        {% endif %}  
+                      </a>
+                      <a type="button" href="{% url 'teswir' i.id ln %}" class="btn btn-sm btn-outline-secondary">
+                        {% if ln == 'tm' %}
+                        Teswir
+                        {% elif ln == 'ru' %}
+                        Комментарий
+                        {% elif ln == 'en' %}
+                        Comment
+                        {% endif %}       
+                    </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+{% include 'footer.html' %}
+</html>

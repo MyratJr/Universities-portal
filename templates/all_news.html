@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <title>Document</title>
+</head>
+{% include 'header.html' %}
+<body>
+    <h1 style="color:rgba(0, 0, 187, 0.74);margin-left:5%;margin-top:2%;font-size:6vh">
+        {% if ln == 'tm' %}
+        Täze tehnologiýalar (Habarlar)
+        {% elif ln == 'ru' %}
+        Новые технологии (Новости)
+        {% elif ln == 'en' %}
+        New technologies (News)
+        {% endif %}
+    </h1>
+    <div class="album py-5 bg-light" style="margin-top:3%;width:90%;margin-left:5%">
+        <div class="container">
+    
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for i in all_news %}
+            <div class="col-md-3">
+              <div class="card shadow">
+                <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="{{i.surat}}" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
+                <a href="{% url 'each_news' i.id ln %}"><img class="bd-placeholder-img card-img-top" src="{{i.surat.url}}" style="width:100%;height:23vh"></a>
+                <div class="card-body" style="height:auto;">
+                  <p class="card-text" style="min-height: 72px;">
+                    {% if ln == 'tm' %}
+                    {{i.title_tm}}
+                    {% elif ln == 'ru' %}
+                    {{i.title_ru}}
+                    {% elif ln == 'en' %}
+                    {{i.title_en}}
+                    {% endif %}
+                </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a type="button" href="{% url 'each_news' i.id ln %}" class="btn btn-sm btn-outline-secondary">
+                        {% if ln == 'tm' %}
+                        Giňişleýin
+                        {% elif ln == 'ru' %}
+                        Более
+                        {% elif ln == 'en' %}
+                        More
+                        {% endif %}
+                        </a>
+                    </div>
+                    <small class="text-muted">{{i.wagt|date:"d.m.Y"}}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+{% include 'footer.html' %}
+</html>

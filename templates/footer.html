@@ -1,0 +1,125 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="" type="image/png">
+    <title>Footer</title>
+    <!-- Bootstrap CSS -->
+    <!-- main css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<style>
+    @media (min-width: 1200px) {
+        .suysda{
+            margin-right: {{ses}};
+            margin-top:{{topi}}
+        }}
+
+</style>
+<body>
+
+
+    <!--================ start footer Area  =================-->
+    <footer class="footer-area suysda" style="margin-bottom: -2%;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 single-footer-widget"  style="margin-top: 7%;">
+                    <h4>
+                        {% if ln == 'tm' %}
+                        BIZ BILEN HABARLAŞYŇ
+                        {% elif ln == 'ru' %}
+                        СВЯЖИТЕСЬ С НАМИ
+                        {% elif ln == 'en' %}
+                        CONTACT US
+                        {% endif %}
+                    </h4>
+                    {% if ln == 'tm' %}
+                    Habarlaşmak üçin:<br>
+                    {% elif ln == 'ru' %}
+                    Телефон:<br>
+                    {% elif ln == 'en' %}
+                    Phone:<br>
+                    {% endif %}
+                    +993 63 45 12 32<br>
+                        <a href="mailto:gitieee@gmail.com">
+                            <span class="lnr lnr-envelope"></span>
+                            <span class="text">
+                                <span class="text">taze_tehnologiya@gmail.com</span>
+                            </span>
+                        </a>
+                    </p>
+                    <div class="row footer-bottom d-flex justify-content-between">
+                        <div class="col-lg-6 col-sm-12 footer-social">
+                            <a href="" target="_blank"><i
+                                    class="fa fa-facebook"></i></a>
+                            <a href="" target="_blank"><i
+                                    class="fa fa-twitter"></i></a>
+                            <a href=""><i
+                                    class="fa fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    </p>
+                </div>
+                <div class="col-lg-4 col-md-6 single-footer-widget" style="margin-top: 7%;">
+                    <h4>
+                        {% if ln == 'tm' %}
+                        Saglyk
+                        {% elif ln == 'ru' %}
+                        Здоровье
+                        {% elif ln == 'en' %}
+                        Health
+                        {% endif %} 
+                        </h4>
+                    <ul>
+                        <li><a href="https://spectrum.ieee.org/geek-life/hands-on/how-to-look-people-in-the-eye-while-videoconferencing"
+                                target="_blank">
+                                {% if ln == 'tm' %}
+                                Wideokonferensiýa geçirilende adamlara göz bilen nädip seretmeli
+                                {% elif ln == 'ru' %}
+                                Как смотреть людям в глаза во время видеоконференции
+                                {% elif ln == 'en' %}
+                                How to Look People in the Eye While Videoconferencing
+                                {% endif %} 
+                            </a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6 single-footer-widget" style="margin-top: 7%;">
+                    <h4>
+                        {% if ln == 'tm' %}
+                        BIZI TAP
+                        {% elif ln == 'ru' %}
+                        Найти нас
+                        {% elif ln == 'en' %}
+                        LOCATE US
+                        {% endif %} 
+                    </h4>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1346.4756029977789!2d58.412952960404944!3d37.90882277212159!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f6ffd00beddef25%3A0x9c4fd1e2737f7153!2sWC57%2B94V%2C%20Ashgabat%2C%20Turkmenistan!5e1!3m2!1sen!2sin!4v1670084038626!5m2!1sen!2sin"
+                        width="300" height="300" frameborder="0" style="border:0;" allowfullscreen=""
+                        aria-hidden="false" tabindex="0"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-text">
+            <center>
+                <p style="margin-top: 80px;">
+                    {% if ln == 'tm' %}
+                    Saýt "Tehnologiýalar merkezi" tarapyndan döredilen
+                    {% elif ln == 'ru' %}
+                    Сайт сделано "Tehnologiýalar merkezi"
+                    {% elif ln == 'en' %}
+                    Site Made by "Tehnologiýalar merkezi"
+                    {% endif %} 
+                </p>
+                <center>
+        </div>
+        </div>
+    </footer>
+</body>
+
+</html>
